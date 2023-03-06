@@ -16,7 +16,8 @@ struct ContentView: View {
 //                Conv2D()
 //                Formula()
 //                VideoPreview()
-                Pooling()
+//                Pooling()
+                Thumbnail()
             } else {
                 VStack{}
             }

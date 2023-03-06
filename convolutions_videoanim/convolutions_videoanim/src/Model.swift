@@ -24,7 +24,7 @@ class Model: ObservableObject {
     
     func run() async {
         // sleep for 5 seconds at start
-        try? await Task.sleep(nanoseconds: 5_000_000_000)
+        try? await Task.sleep(nanoseconds: 1_000_000_000)
         
         DispatchQueue.main.async {
             withAnimation(anim) {
