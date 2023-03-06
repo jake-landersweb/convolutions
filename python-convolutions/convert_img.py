@@ -17,7 +17,7 @@ def img_to_3d_arr():
 
 def img_to_2d_gray():
     # Open the image and convert to grayscale
-    image = Image.open("./mario.webp").convert("L")
+    image = Image.open("./mario.png").convert("L")
 
     # Get the pixel data as a list of values between 0 and 255
     pixels = list(image.getdata())
@@ -33,6 +33,7 @@ def img_to_2d_gray():
 
     # Reshape the pixel list into a 2D array
     width, height = image.size
+    pixels = [i if i < 1 else 0 for i in pixels]
     pixels_2d = [pixels[i : i + width] for i in range(0, len(pixels), width)]
     print(pixels_2d)
 

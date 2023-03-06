@@ -15,7 +15,8 @@ struct ContentView: View {
             if model.show {
 //                Conv2D()
 //                Formula()
-                VideoPreview()
+//                VideoPreview()
+                Pooling()
             } else {
                 VStack{}
             }

@@ -124,7 +124,6 @@ struct Conv2D: View {
         }
         return false
     }
-    
 }
 
 struct Conv2D_Previews: PreviewProvider {

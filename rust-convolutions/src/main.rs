@@ -9,11 +9,13 @@ use kernel::*;
 mod convolve;
 mod dft;
 mod error;
+mod padding;
+mod pooling;
 mod prelude;
 
 fn main() -> Result<()> {
     let now = Instant::now();
-    let img_name = "3840x2160.jpg";
+    let img_name = "1920x1080.jpg";
     let kernel = Kernel::gaussian(31, 5.);
     let kernel_name = "gaussian";
 
@@ -21,12 +23,12 @@ fn main() -> Result<()> {
     let (width, height, img) = read_image(img_name)?;
 
     // process image
-    let processed_fft = convolve::fft_conv_2d_fast(&img, &kernel);
+    let processed = convolve::fft_conv_2d_fast(&img, &kernel);
 
     // save the images
     let items = img_name.split(".").collect::<Vec<&str>>();
-    let img_name = std::format!("{}-{}-fft-fast.{}", items[0], kernel_name, items[1]);
-    save_img(width, height, &img_name, &processed_fft)?;
+    let img_name = std::format!("{}-pooling-stoch11.{}", items[0], items[1]);
+    save_img(width, height, &img_name, &processed)?;
 
     let elapsed = now.elapsed();
     println!("Basic Convolve: {:.3?} sec", elapsed.as_secs_f32());
@@ -53,108 +55,6 @@ fn main2() -> Result<()> {
 
     let elapsed = now.elapsed();
     println!("Basic Convolve: {:.3?} sec", elapsed.as_secs_f32());
-
-    return Ok(());
-}
-
-fn conv_example() {
-    let input = vec![0., 0., 0., 4., 4., 4., 4., 0., 0., 4., 4., 4., 0., 0., 0.];
-    let kernel: Vec<f64> = vec![1. / 3., 1. / 3., 1. / 3.];
-    let convout = convolve::conv(&input, &kernel);
-    println!("{:?}", convout);
-    println!(
-        "Original length: {}, Output Length: {}",
-        input.len(),
-        convout.len()
-    );
-}
-
-fn conv_pad_example() {
-    let input = vec![0., 0., 0., 4., 4., 4., 4., 0., 0., 4., 4., 4., 0., 0., 0.];
-    let kernel: Vec<f64> = vec![1. / 3., 1. / 3., 1. / 3.];
-    let convout = convolve::conv_pad(&input, &kernel);
-    println!("{:?}", convout);
-    println!(
-        "Original length: {}, Output Length: {}",
-        input.len(),
-        convout.len()
-    );
-}
-
-fn process_example() {
-    let imgs = [
-        // "256x256.jpg",
-        // "1600x900.jpg",
-        // "1920x1080.jpg",
-        "3840x2160.jpg",
-    ];
-    let kernel = Kernel::gaussian(31, 5.);
-    let kernel_name = "gaussian";
-    for img in imgs {
-        println!("[[Testing img: {} with kernel: {}]]", img, kernel_name);
-        process_image(img, &kernel, kernel_name);
-        process_image_rustfft(img, &kernel, kernel_name);
-        process_image_cfft(img, &kernel, kernel_name);
-        println!();
-    }
-}
-
-fn process_image(image_name: &str, kernel: &Kernel, kernel_name: &str) -> Result<()> {
-    let now = Instant::now();
-
-    // read the image
-    let (width, height, img) = read_image(image_name)?;
-
-    // process image
-    let processed_fft = convolve::conv_2d(&img, kernel);
-
-    // save the images
-    let items = image_name.split(".").collect::<Vec<&str>>();
-    let img_name = std::format!("{}-{}.{}", items[0], kernel_name, items[1]);
-    save_img(width, height, &img_name, &processed_fft)?;
-
-    let elapsed = now.elapsed();
-    println!("Basic Convolve: {:.3?} sec", elapsed.as_secs_f32());
-
-    return Ok(());
-}
-
-fn process_image_cfft(image_name: &str, kernel: &Kernel, kernel_name: &str) -> Result<()> {
-    let now = Instant::now();
-
-    // read the image
-    let (width, height, img) = read_image(image_name)?;
-
-    // process image
-    let processed_fft = convolve::fft_conv_2d(&img, kernel);
-
-    // save the images
-    let items = image_name.split(".").collect::<Vec<&str>>();
-    let img_name = std::format!("{}-{}-cfft.{}", items[0], kernel_name, items[1]);
-    save_img(width, height, &img_name, &processed_fft)?;
-
-    let elapsed = now.elapsed();
-    println!("Custom FFT: {:.3?} sec", elapsed.as_secs_f32());
-
-    return Ok(());
-}
-
-fn process_image_rustfft(image_name: &str, kernel: &Kernel, kernel_name: &str) -> Result<()> {
-    let now = Instant::now();
-
-    // read the image
-    let (width, height, img) = read_image(image_name)?;
-
-    // process image
-    let processed_fft = convolve::fft_conv_2d_fast(&img, kernel);
-
-    // save the images
-    let items = image_name.split(".").collect::<Vec<&str>>();
-    let img_name = std::format!("{}-{}-rustfft.{}", items[0], kernel_name, items[1]);
-    save_img(width, height, &img_name, &processed_fft)?;
-
-    let elapsed = now.elapsed();
-    println!("RustFFT: {:.3?} sec", elapsed.as_secs_f32());
 
     return Ok(());
 }

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A64AEF3329B546C8001B096C /* Pooling.swift in Sources */ = {isa = PBXBuildFile; fileRef = A64AEF3229B546C8001B096C /* Pooling.swift */; };
 		A6E81BBE29B2D1D50010889D /* convolutions_videoanimApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E81BBD29B2D1D50010889D /* convolutions_videoanimApp.swift */; };
 		A6E81BC029B2D1D50010889D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E81BBF29B2D1D50010889D /* ContentView.swift */; };
 		A6E81BC229B2D1D50010889D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A6E81BC129B2D1D50010889D /* Assets.xcassets */; };
@@ -20,6 +21,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A64AEF3229B546C8001B096C /* Pooling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pooling.swift; sourceTree = "<group>"; };
 		A6E81BBA29B2D1D50010889D /* convolutions_videoanim.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = convolutions_videoanim.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A6E81BBD29B2D1D50010889D /* convolutions_videoanimApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = convolutions_videoanimApp.swift; sourceTree = "<group>"; };
 		A6E81BBF29B2D1D50010889D /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -95,6 +97,7 @@
 				A6E81BD929B3CE0C0010889D /* dot.c */,
 				A6E81BD729B3CE0C0010889D /* convolutions_videoanim-Bridging-Header.h */,
 				A6E81BDB29B430E70010889D /* VideoPreview.swift */,
+				A64AEF3229B546C8001B096C /* Pooling.swift */,
 			);
 			path = src;
 			sourceTree = "<group>";
@@ -178,6 +181,7 @@
 				A6E81BD229B2D27F0010889D /* Formula.swift in Sources */,
 				A6E81BDC29B430E70010889D /* VideoPreview.swift in Sources */,
 				A6E81BBE29B2D1D50010889D /* convolutions_videoanimApp.swift in Sources */,
+				A64AEF3329B546C8001B096C /* Pooling.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
